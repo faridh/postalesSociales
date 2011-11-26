@@ -39,9 +39,10 @@
             var appID           = '<?php echo FACEBOOK_ID; ?>';
             var userID          = 0;
             var redirectURI     = '<?php echo CANVAS_PAGE; ?>';
-            var access_token    = '';
             var environment     = '<?php echo FRONTEND_ENVIRONMENT; ?>';
+            var userObject      = new Object();
             var friendsList     = new Object();
+            var photoList       = new Object();
             
             window.fbAsyncInit = function()
             {
@@ -107,19 +108,65 @@
                 
                 FB.api('/me', function(response) 
                 {
-                    if(response.error)
+                    if (response.error)
                     {
                         fetchFBUser();
                     }
                     else
                     {
-                        
-                        $("#loading-message").html("¡Terminado!");
-                        $("#loading").fadeOut();
+                        userObject = response
+                        $("#loading-message").html("¡Buscando amigos del Usuario!");
+                        log_message("USER: ");
                         log_message(response);
+                        fetchFBUserFriends();
                     }
                     
                 });
+            }
+            
+            function fetchFBUserFriends()
+            {
+                FB.api('/me/friends', function(response) 
+                {
+                    if (response.error)
+                    {
+                        log_message("fetchFBUserFriends() ERROR");
+                    }
+                    else
+                    {
+                        friendsList = response;
+                        $("#loading-message").html("¡Buscando fotos del Usuario!");
+                        log_message("FRIENDS: ");
+                        log_message(response);
+                        fetchFBUserPhotos();
+                        //$("#loading").fadeOut();
+                    }
+                });
+            }
+            
+            function fetchFBUserPhotos()
+            {
+                FB.api('/me/photos', function(response) 
+                {
+                    if (response.error)
+                    {
+                        log_message("fetchFBUserPhotos() ERROR");
+                    }
+                    else
+                    {
+                        photoList = response;
+                        $("#loading-message").html("¡Iniciando Aplicación!");
+                        log_message("PHOTOS: ");
+                        log_message(response);
+                        $("#loading").fadeOut();
+                        displayUserInterface();
+                    }
+                });
+            }
+            
+            function displayUserInterface()
+            {
+                log_message("READY TO DISPLAY USER INTERFACE");
             }
 
         </script>
