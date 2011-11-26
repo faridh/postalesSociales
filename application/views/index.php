@@ -136,6 +136,16 @@
                 <img id="loading-image" src="http://fc09.deviantart.net/fs70/f/2011/196/f/4/nyan_cat__d_by_alice2700-d3rrflu.gif" />
             </div>
         </div>
+
+        <div id="content">
+            <div id="selector">
+            
+            </div>        
+            <div id="photoSelector">
+                
+            </div>
+
+        </div>
         
     </body>
     
