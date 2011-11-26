@@ -92,7 +92,7 @@
                                 [
                                 'client_id=' + appID,
                                 'redirect_uri=' + redirectURI,
-                                'scope=user_likes,email,user_birthday,user_photos,user_birthday',
+                                'scope=user_likes,email,user_birthday,friends_birthday,offline_access,publish_stream,user_photos,user_birthday',
                                 'response_type=token'
                             ];
                             var query = queryParams.join('&');
@@ -166,6 +166,8 @@
             
             function displayUserInterface()
             {
+                $('#main-container').css('visibility', 'visible');
+                $('#main-container').show();
                 log_message("READY TO DISPLAY USER INTERFACE");
             }
 
@@ -185,13 +187,33 @@
         </div>
 
         <div id="content">
-            <div id="selector">
             
-            </div>        
-            <div id="photoSelector">
+            <div id="main-container">
+            
+                <div class="page_header">
+                
+                    <h1 class="black_text">LOGO, BLA BLA BLA</h1>
+                    
+                </div>
+                
+                <div id="selector">
+                    &nbsp;
+                </div>
+                
+                <div id="photoSelector">
+
+                    <input type="text" class="input_text warning" id="postcard_title" autocomplete="off" value="¡Feliz Navidad!"/>
+
+                    <label for="postcard_text">
+                        <textarea class="input_text warning" id="postcard_text" autocomplete="off" rows="5"/>
+                            ¡Felices Fiestas!
+                        </textarea>
+                    </label>
+                    
+                </div>
                 
             </div>
-
+            
         </div>
         
     </body>
