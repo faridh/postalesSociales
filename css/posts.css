@@ -1,0 +1,226 @@
+.post {
+    width: 700px;
+    height: auto;
+    min-width: 700px;
+    min-height: 500px;
+    -moz-box-shadow: 0px 0px 10px #dfdfdf;
+	-o-box-shadow:0px 0px 10px #dfdfdf;
+	-webkit-box-shadow: 0px 0px 10px #dfdfdf;
+	box-shadow: 0px 0px 10px #dfdfdf;
+	padding-bottom: 20px;
+    background-image: url(../images/new_design/PaperCanvas.png);
+    background-repeat: repeat-y;
+    background-color: transparent;
+	margin: 0 auto 20px;
+}
+
+.official-post {
+    width: 700px;
+    height: auto;
+    min-width: 700px;
+    min-height: 500px;
+    -moz-box-shadow: 0px 0px 10px #dfdfdf;
+	-o-box-shadow:0px 0px 10px #dfdfdf;
+	-webkit-box-shadow: 0px 0px 10px #dfdfdf;
+	box-shadow: 0px 0px 10px #dfdfdf;
+	padding-bottom: 20px;
+    background-image: url(../images/new_design/PaperCanvas.png);
+    background-repeat: repeat-y;
+	margin: 0 auto 20px;
+}
+
+.official-post-large {
+    width: 700px;
+    height: auto;
+    min-width: 700px;
+    min-height: 500px;
+    -moz-box-shadow: 0px 0px 10px #dfdfdf;
+	-o-box-shadow:0px 0px 10px #dfdfdf;
+	-webkit-box-shadow: 0px 0px 10px #dfdfdf;
+	box-shadow: 0px 0px 10px #dfdfdf;
+	padding-bottom: 20px;
+	background-image: url(../images/new_design/PaperCanvas.png);
+    background-repeat: repeat-y;
+	margin: 0 auto 20px;
+}
+
+.post-content {
+    width: 380px;
+    height: auto;
+    padding: 10px;
+    float:left;
+}
+
+.post-content img {
+    max-width: 380px;
+    margin: 0 auto;
+}
+
+.post-info {
+    width: 280px;
+    float:left;
+    text-align: left;
+    padding: 10px;
+}
+
+.official-post-info {
+    width: 430px;
+    float: left;
+    text-align: left;
+    padding: 20px;
+}
+
+.official-post-info-large {
+    width: 666px;
+    float: left;
+    text-align: left;
+    padding: 20px;
+}
+
+.previous-posts {
+    width: 180px;
+    float: right;
+    text-align: right;
+    padding: 20px;
+}
+
+.post-info h3 {
+    overflow: hidden;
+    line-height: 40px;
+    max-width: 280px;
+    max-height: 80px;
+}
+
+.post-info p {
+    font-family: Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 30px;
+	margin: 0;
+	padding: 0;
+	color: black;
+	margin-top: 10px;
+	height:30px;
+}
+
+.user {
+    width: 100%;
+    height: 55px;
+}
+
+.user-img {
+    min-width: 50px;
+    min-height: 50px;
+    -moz-box-shadow: 0px 0px 10px #dfdfdf;
+	-o-box-shadow:0px 0px 10px #dfdfdf;
+	-webkit-box-shadow: 0px 0px 10px #dfdfdf;
+	box-shadow: 0px 0px 10px #dfdfdf;
+	border: 1px solid #dedede;
+	display: inline;
+	float: left;
+}
+
+.user-info {
+    float: left;
+    margin: 5px;
+}
+
+
+
+.badges img {
+    margin: 5px;
+    display: inline;
+}
+
+.post-date {
+    background: url(../images/icons2/png/24x24/calendar.png) no-repeat 0 0;
+    display: inline-block;
+    padding-left: 26px;
+    min-height: 30px;
+    text-align: left;
+    margin-right: 5px;
+}
+
+.post-likes {
+    background: url(../images/icons2/png/24x24/heart.png) no-repeat 0 0;
+    display: inline-block;
+    padding-left: 26px;
+    min-height: 30px;
+    text-align: left;
+    margin-right: 5px;
+}
+
+.post-comments {
+    background: url(../images/icons2/png/24x24/comment_bubble.png) no-repeat 0 0;
+    display: inline-block;
+    padding-left: 26px;
+    min-height: 30px;
+    text-align: left;
+    margin-right: 5px;
+}
+
+.post-buttons {
+    width: 204px;
+    height: 50px;
+    margin: 20px auto;
+    padding: 0;
+	overflow: hidden;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    box-shadow: 0 1px #fff inset, 0 1px 2px #eee;
+    -moz-box-shadow: 0 1px #fff inset, 0 1px 2px #eee;
+    -webkit-box-shadow: 0 1px #fff inset, 0 1px 2px #eee;
+}
+
+.post-buttons a {
+    display: block;
+    width: 101px;
+    height: 50px;
+    font-size: 12px;
+    font-family: "CabinSketchBold", Arial, Helvetica, sans-serif;
+	color:#3B5998;
+}
+
+
+.post-buttons a:hover {
+    background-color: #e1e1e1;
+}
+
+.like-button {
+    display: inline-block;
+    float:left;
+    border-right: 1px solid #FFFFFF;
+}
+
+.like-button span {
+    display:block;
+    margin: 0 auto;
+    padding-top: 35px;
+    text-align:center;
+    background: url(../images/icons2/png/32x32/heart.png) no-repeat 40px 4px;
+}
+
+.comment-button {
+    display: inline-block;
+    float:left;
+}
+
+.comment-button span {
+    display:block;
+    margin: 0 auto;
+    padding-top: 35px;
+    text-align:center;
+    background: url(../images/icons2/png/32x32/comment_bubble.png) no-repeat 40px 4px;
+}
+
+.share-buttons {
+    width: 350px;
+    height: 50px;
+    display:block;
+}
+
+.post-tags {
+    display:block;
+}
