@@ -53,7 +53,7 @@
                     oauth      : true, // enable OAuth 2.0
                     xfbml      : true  // parse XFBML
                 });
-                $("#loading-message").html("¡Autorizando aplicacion!");
+                $("#loading-message").html("¡Autorizando aplicación!");
                 fb_init = true;
                 testLoginStatus();
             };
@@ -116,7 +116,7 @@
                         
                         $("#loading-message").html("¡Terminado!");
                         $("#loading").fadeOut();
-                        showWelcomeForm();
+                        log_message(response);
                     }
                     
                 });
