@@ -2,8 +2,8 @@
 /* CSS Document */
 
 body{
-	background:url(../images/new_design/BackgroundTable.png);
-    background-repeat: repeat-y;
+	background:url(../images/bg_page.png);
+    background-repeat: repeat-x;
 	background-color: #deefff;
 	color:#FFFFFF;
 }
