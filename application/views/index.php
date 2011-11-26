@@ -107,19 +107,63 @@
                 
                 FB.api('/me', function(response) 
                 {
-                    if(response.error)
+                    if (response.error)
                     {
                         fetchFBUser();
                     }
                     else
                     {
                         
-                        $("#loading-message").html("¡Terminado!");
-                        $("#loading").fadeOut();
+                        $("#loading-message").html("¡Buscando amigos del Usuario!");
+                        log_message("USER: ");
                         log_message(response);
+                        fetchFBUserFriends();
                     }
                     
                 });
+            }
+            
+            function fetchFBUserFriends()
+            {
+                FB.api('/me/friends', function(response) 
+                {
+                    if (response.error)
+                    {
+                        log_message("fetchFBUserFriends() ERROR");
+                    }
+                    else
+                    {
+                        $("#loading-message").html("¡Buscando fotos del Usuario!");
+                        log_message("FRIENDS: ");
+                        log_message(response);
+                        fetchFBUserPhotos();
+                        //$("#loading").fadeOut();
+                    }
+                });
+            }
+            
+            function fetchFBUserPhotos()
+            {
+                FB.api('/me/photos', function(response) 
+                {
+                    if (response.error)
+                    {
+                        log_message("fetchFBUserPhotos() ERROR");
+                    }
+                    else
+                    {
+                        $("#loading-message").html("¡Iniciando Aplicación!");
+                        log_message("PHOTOS: ");
+                        log_message(response);
+                        $("#loading").fadeOut();
+                        displayUserInterface();
+                    }
+                });
+            }
+            
+            function displayUserInterface()
+            {
+                log_message("READY TO DISPLAY USER INTERFACE");
             }
 
         </script>
