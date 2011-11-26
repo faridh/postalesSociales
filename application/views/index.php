@@ -39,9 +39,10 @@
             var appID           = '<?php echo FACEBOOK_ID; ?>';
             var userID          = 0;
             var redirectURI     = '<?php echo CANVAS_PAGE; ?>';
-            var access_token    = '';
             var environment     = '<?php echo FRONTEND_ENVIRONMENT; ?>';
+            var userObject      = new Object();
             var friendsList     = new Object();
+            var photoList       = new Object();
             
             window.fbAsyncInit = function()
             {
@@ -113,7 +114,7 @@
                     }
                     else
                     {
-                        
+                        userObject = response
                         $("#loading-message").html("¡Buscando amigos del Usuario!");
                         log_message("USER: ");
                         log_message(response);
@@ -133,6 +134,7 @@
                     }
                     else
                     {
+                        friendsList = response;
                         $("#loading-message").html("¡Buscando fotos del Usuario!");
                         log_message("FRIENDS: ");
                         log_message(response);
@@ -152,6 +154,7 @@
                     }
                     else
                     {
+                        photoList = response;
                         $("#loading-message").html("¡Iniciando Aplicación!");
                         log_message("PHOTOS: ");
                         log_message(response);
