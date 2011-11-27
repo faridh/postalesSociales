@@ -20,6 +20,26 @@ class Main extends CI_Controller
     {
         $this->load->view('index');
     }
+    
+    public function getUserSentPostcards()
+    {
+        $this->load->database();
+        
+        $userId                     = $_POST['userId'];
+        $response                   = new stdClass();
+        $response->userId           = $userId;
+        $response->postcards        = array();
+        
+        $query = $this->db->get_where('sent_postcards', array('user_id' => $userId));
+        
+        foreach ($query->result() as $row) 
+        {
+            $id                         = $row->id;
+            $response->postcards[$id]   = $row;
+        }
+        
+        die(json_encode($response));
+    }
 
     public function sendPostcard()
     {
@@ -27,26 +47,26 @@ class Main extends CI_Controller
         $this->load->database();
         
         $userId         = $_POST['userId'];
-        $friendId       = $_POST['friendId'];
+        $friends        = json_decode($_POST['friends']);
         $title          = $_POST['title'];
         $message        = $_POST['message'];
         $backgroundId   = $_POST['backgroundId'];
         $songId         = $_POST['songId'];
-        
-        $friends        = $friendId;
-        
-        $newPostcard    = array(
-            'user_id'       => $userId,
-            'background_id' => $backgroundId,
-            'title'         => $title,
-            'message'       => $message,
-            'song_id'       => $songId,
-            'friends'       => $friends,
-            'created_at'    => time()
-            
-        );
-        
-        $this->db->insert('sent_postcards', $newPostcard);
+                
+        foreach ( $friends->friends as $friend )
+        {
+            $newPostcard    = array(
+                'user_id'       => $userId,
+                'background_id' => $backgroundId,
+                'title'         => $title,
+                'message'       => $message,
+                'song_id'       => $songId,
+                'friend_id'     => $friend->id,
+                'created_at'    => time()
+            );
+
+            $this->db->insert('sent_postcards', $newPostcard);
+        }
         
         die("{success:true}");
     }

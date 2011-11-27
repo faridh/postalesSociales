@@ -575,7 +575,7 @@ div .like_container {
     vertical-align: middle;
     float: left;
     border: 2px dotted #000;
-    min-height: 900px;
+    min-height: 1000px;
 }
 
 #photoSelector {
@@ -585,7 +585,7 @@ div .like_container {
     vertical-align: middle;
     float: right;
     border: 2px dotted #000;
-    min-height: 900px;
+    min-height: 1000px;
 }
 
 #postcard_image_container {
@@ -632,15 +632,15 @@ div .like_container {
 
 #friend_list_container
 {
-position: absolute;
-left: 0;
-top: 0;
-width: 202px;
-color: #615E78;
-font-size: 12px;
--moz-box-shadow: 1px 0 2px #cdccd4;
--webkit-box-shadow: 1px 0 2px #cdccd4;
-box-shadow: 1px 0 2px #cdccd4;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 202px;
+    color: #615E78;
+    font-size: 12px;
+    -moz-box-shadow: 1px 0 2px #cdccd4;
+    -webkit-box-shadow: 1px 0 2px #cdccd4;
+    box-shadow: 1px 0 2px #cdccd4;
 }
 
 #list {
@@ -690,48 +690,50 @@ box-shadow: 1px 0 2px #cdccd4;
     cursor: pointer;
 }
 
-.checked {background-position:0px -50px}
+.checked {
+    background-position:0px -50px
+}
 
 #success_message #progress_bar {
-margin: 4px;
-border: 1px solid #A4A3B2;
-background-color: #AD9FA7;
-overflow: hidden;
+    margin: 4px;
+    border: 1px solid #A4A3B2;
+    background-color: #AD9FA7;
+    overflow: hidden;
 }
 
 #progress {
-padding: 4px 0px;
-float: left;
-color: white;
-text-align: right;
-font-size: 18px;
-background-color: #FF7B48;
-width: 0;
--moz-box-shadow: -2px -2px -2px #844f3b;
--webkit-box-shadow: -2px -2px -2px #844f3b;
-box-shadow: -2px -2px -2px #844f3
+    padding: 4px 0px;
+    float: left;
+    color: white;
+    text-align: right;
+    font-size: 18px;
+    background-color: #FF7B48;
+    width: 0;
+    -moz-box-shadow: -2px -2px -2px #844f3b;
+    -webkit-box-shadow: -2px -2px -2px #844f3b;
+    box-shadow: -2px -2px -2px #844f3
 }
 
 .BigButton {
-display: inline-block;
-cursor: pointer !important;
-padding: 12px 16px;
-background-color: rgb(166,196,50);
-color: white;
-border: none;
-margin: 11px;
-text-indent: 0;
-font-size: 18px;
-border-radius: 8px;
--moz-border-radius: 8px;
--webkit-border-radius: 8px;
--khtml-border-radius: 8px;
-border-top-left-radius: 8px;
-border-top-right-radius: 8px;
-border-bottom-left-radius: 8px;
-border-bottom-right-radius: 8px;
--moz-box-shadow: 0 0 4px #333333;
--webkit-box-shadow: 0 0 4px #333333;
-box-shadow: 0 0 4px #333333;
-text-decoration: none;
+    display: inline-block;
+    cursor: pointer !important;
+    padding: 12px 16px;
+    background-color: rgb(166,196,50);
+    color: white;
+    border: none;
+    margin: 11px;
+    text-indent: 0;
+    font-size: 18px;
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -khtml-border-radius: 8px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    -moz-box-shadow: 0 0 4px #333333;
+    -webkit-box-shadow: 0 0 4px #333333;
+    box-shadow: 0 0 4px #333333;
+    text-decoration: none;
 }

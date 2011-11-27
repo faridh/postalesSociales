@@ -36,17 +36,21 @@
         
         <script type="text/javascript">
             
-            var fb_init         = false;
-            var appID           = '<?php echo FACEBOOK_ID; ?>';
-            var userID          = 0;
-            var accessToken     = 0;
-            var redirectURI     = '<?php echo CANVAS_PAGE; ?>';
-            var environment     = '<?php echo FRONTEND_ENVIRONMENT; ?>';
-            var userObject      = new Object();
-            var friendsList     = new Object();
-            var friendsArray    = new Array();
-            var photoList       = new Object();
-            var imageId         = '';
+            var fb_init             = false;
+            var appID               = '<?php echo FACEBOOK_ID; ?>';
+            var userID              = 0;
+            var accessToken         = 0;
+            var redirectURI         = '<?php echo CANVAS_PAGE; ?>';
+            var environment         = '<?php echo FRONTEND_ENVIRONMENT; ?>';
+            var userObject          = new Object();
+            var friendsList         = new Object();
+            var friendsArray        = new Array();
+            var photoList           = new Object();
+            var unavailableUsers    = new Array();
+            var sentPostcardsList   = new Array();
+            var sentPostcards       = 0;
+            
+            var imageId             = '';
             
             window.fbAsyncInit = function()
             {
@@ -87,7 +91,7 @@
                             // logged in and connected user, someone you know
                             userID = response.authResponse.userID;
                             accessToken = response.authResponse.accessToken;
-                            fetchFBUser();
+                            fetchUserSentPostcards();
                         } 
                         else
                         {
@@ -108,6 +112,32 @@
                 }
             }
             
+            function fetchUserSentPostcards()
+            {
+                $.ajax(
+                    {
+                        url: "index.php/main/getUserSentPostcards",
+                        data: { userId:userID },
+                        type: 'POST',
+                        error: function(result, error_code, error_thrown)
+                        {
+                            log_message("fetchUserSentPostcards() ERROR");
+                        },
+                        success: function(result)
+                        {
+                            var tempPostcardList = JSON.parse(result);
+                            
+                            for ( postcardId in tempPostcardList.postcards ) 
+                            {
+                                sentPostcardsList.push(tempPostcardList.postcards[postcardId]);
+                            }
+                            
+                            fetchFBUser();
+                        }
+                    }
+                );
+            }
+            
             function fetchFBUser()
             {
                 
@@ -121,8 +151,6 @@
                     {
                         userObject = response
                         $("#loading-message").html("¡Buscando amigos del Usuario!");
-                        log_message("USER: ");
-                        log_message(response);
                         fetchFBUserFriends();
                     }
                     
@@ -146,8 +174,6 @@
                         }
                         
                         $("#loading-message").html("¡Buscando fotos del Usuario!");
-                        log_message("FRIENDS: ");
-                        log_message(response);
                         fetchFBUserPhotos();
                         //$("#loading").fadeOut();
                         fillList(); 
@@ -167,8 +193,6 @@
                     {
                         photoList = response;
                         $("#loading-message").html("¡Iniciando Aplicación!");
-                        log_message("PHOTOS: ");
-                        log_message(response);
                         $("#loading").fadeOut();
                         displayUserInterface();
                     }
@@ -209,17 +233,18 @@
             
             function sendPostcards()
             {
-                var friendId    = '702152773';
+                var friends    = '{"friends":[{"id":"702152773"},{"id":"100001865101410"}]}';
                 var title       = $('#postcard_title').val();
                 var message     = $('#postcard_text').val();
                 
+                showLoading("Enviando Postales...");
                 $.ajax(
                     {
                         url: "index.php/main/sendPostcard",
                         data: 
                             { 
                                 userId:userID, 
-                                friendId:friendId, 
+                                friends:friends, 
                                 title:title, 
                                 message:message, 
                                 backgroundId:'0', 
@@ -233,7 +258,6 @@
                         success: function(result)
                         {
                             log_message(result);
-                            showLoading("Enviando Postales...");
 
                             setTimeout(
                                 function()
@@ -296,9 +320,9 @@
                             ¡Todavía hay <span id="friends_number">0</span> amigos más que amarían recibir esta tarjeta!
                         </p>
                     <div id="added_list"></div>
-                   <div id="progress_bar"><div id="progress" style="width: 0px; ">0%</div></div>
-
-<a id="submit_again" class="BigButton Glowing" href="javascript:void(false);">Send to More Friends</a> 
+                    
+                    <div id="progress_bar"><div id="progress" style="width: 0px; ">0%</div></div>
+                        <a id="submit_again" class="BigButton Glowing" href="javascript:void(false);">Send to More Friends</a> 
                     </div>
                     
                     <input type="text" class="input_text warning" id="postcard_title" autocomplete="off" value="¡Feliz Navidad!"/>
