@@ -630,6 +630,19 @@ div .like_container {
     visibility: hidden;
 }
 
+#friend_list_container
+{
+position: absolute;
+left: 0;
+top: 0;
+width: 202px;
+color: #615E78;
+font-size: 12px;
+-moz-box-shadow: 1px 0 2px #cdccd4;
+-webkit-box-shadow: 1px 0 2px #cdccd4;
+box-shadow: 1px 0 2px #cdccd4;
+}
+
 #list {
     border-top: 1px solid #CDCCD4;
     border-bottom: 1px solid #DBDBDB;
@@ -676,3 +689,6 @@ div .like_container {
     text-overflow: ellipsis;
     cursor: pointer;
 }
+
+.checked {background-position:0px -50px}
+

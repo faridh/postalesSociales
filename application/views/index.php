@@ -265,13 +265,12 @@
             <div id="main-container">
             
                 <div class="page_header">
-                
-                    <h1 class="black_text">LOGO, BLA BLA BLA</h1>
-                    
+                    <h1 class="black_text">Tarjetitas Navideñas</h1>
                 </div>
                 
-                <div id="selector">
-                       <div id="instructions">Deselecciona a los amigos a los que no les quieras enviar esta tarjeta</div>     
+                <div id="selector" class="Design1">
+                       <div class="Prompt" id="instructions">Deselecciona a los amigos a los que no les quieras enviar esta tarjeta</div>     
+                    <input type="text" id="search">
                    <div id="list"></div>
                 </div>
                 
