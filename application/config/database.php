@@ -47,53 +47,21 @@
 $active_group = AlebrijeConfig::get('IKI_ENVIRONMENT');
 $active_record = TRUE;
 
-$db['dev']['hostname'] = '127.0.0.1';
-$db['dev']['username'] = 'root';
-$db['dev']['password'] = 'root';
-$db['dev']['database'] = 'socializador';
-$db['dev']['dbdriver'] = 'mysql';
-$db['dev']['dbprefix'] = '';
-$db['dev']['pconnect'] = TRUE;
-$db['dev']['db_debug'] = TRUE;
-$db['dev']['cache_on'] = FALSE;
-$db['dev']['cachedir'] = '';
-$db['dev']['char_set'] = 'utf8';
-$db['dev']['dbcollat'] = 'utf8_general_ci';
-$db['dev']['swap_pre'] = '';
-$db['dev']['autoinit'] = TRUE;
-$db['dev']['stricton'] = FALSE;
-
-$db['stage']['hostname'] = '127.0.0.1';
-$db['stage']['username'] = 'socializador';
-$db['stage']['password'] = 'Ktj9GbQRGwxHZSHL';
-$db['stage']['database'] = 'socializador';
-$db['stage']['dbdriver'] = 'mysql';
-$db['stage']['dbprefix'] = '';
-$db['stage']['pconnect'] = TRUE;
-$db['stage']['db_debug'] = TRUE;
-$db['stage']['cache_on'] = FALSE;
-$db['stage']['cachedir'] = '';
-$db['stage']['char_set'] = 'utf8';
-$db['stage']['dbcollat'] = 'utf8_general_ci';
-$db['stage']['swap_pre'] = '';
-$db['stage']['autoinit'] = TRUE;
-$db['stage']['stricton'] = FALSE;
-
-$db['prod']['hostname'] = '127.0.0.1';
-$db['prod']['username'] = 'socializador';
-$db['prod']['password'] = 'awSS3AEsJL24qWK2';
-$db['prod']['database'] = 'socializador';
-$db['prod']['dbdriver'] = 'mysql';
-$db['prod']['dbprefix'] = '';
-$db['prod']['pconnect'] = TRUE;
-$db['prod']['db_debug'] = TRUE;
-$db['prod']['cache_on'] = FALSE;
-$db['prod']['cachedir'] = '';
-$db['prod']['char_set'] = 'utf8';
-$db['prod']['dbcollat'] = 'utf8_general_ci';
-$db['prod']['swap_pre'] = '';
-$db['prod']['autoinit'] = TRUE;
-$db['prod']['stricton'] = FALSE;
+$db['DEV']['hostname'] = '127.0.0.1';
+$db['DEV']['username'] = 'root';
+$db['DEV']['password'] = 'root';
+$db['DEV']['database'] = 'postalitas';
+$db['DEV']['dbdriver'] = 'mysql';
+$db['DEV']['dbprefix'] = '';
+$db['DEV']['pconnect'] = TRUE;
+$db['DEV']['db_debug'] = TRUE;
+$db['DEV']['cache_on'] = FALSE;
+$db['DEV']['cachedir'] = '';
+$db['DEV']['char_set'] = 'utf8';
+$db['DEV']['dbcollat'] = 'utf8_general_ci';
+$db['DEV']['swap_pre'] = '';
+$db['DEV']['autoinit'] = TRUE;
+$db['DEV']['stricton'] = FALSE;
 
 /* End of file database.php */
 /* Location: ./application/config/database.php */

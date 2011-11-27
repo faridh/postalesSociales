@@ -38,6 +38,7 @@
             var fb_init         = false;
             var appID           = '<?php echo FACEBOOK_ID; ?>';
             var userID          = 0;
+            var accessToken     = 0;
             var redirectURI     = '<?php echo CANVAS_PAGE; ?>';
             var environment     = '<?php echo FRONTEND_ENVIRONMENT; ?>';
             var userObject      = new Object();
@@ -83,6 +84,7 @@
                         {
                             // logged in and connected user, someone you know
                             userID = response.authResponse.userID;
+                            accessToken = response.authResponse.accessToken;
                             fetchFBUser();
                         } 
                         else
@@ -170,10 +172,9 @@
                 $('#main-container').css('visibility', 'visible');
                 $('#main-container').show();
                 $('#user_image').attr('src', 'https://graph.facebook.com/'+ userID +'/picture?type=large');
-                $('#user_image').attr('height', '200px');
-                $('#user_image').attr('width', '200px');
-                $('#user_image').css('margin-top', '50px');
-                log_message("READY TO DISPLAY USER INTERFACE");
+                $('#user_image').attr('height', '260px');
+                $('#user_image').attr('width', '260px');
+                $('#user_image').css('margin-top', '20px');
             }
             
             function changeBackground(imageId)
@@ -181,9 +182,50 @@
                 $('#postcard_image_container').css('background-image', 'url("images/templates/background'+imageId+'.png")');
             }
             
+            function displayChangePostcard()
+            {
+                $('#change_postcard_overlay').css('visibility', 'visible');
+                $('#change_postcard_overlay').fadeIn(250);
+            }
+            
+            function hideChangePostcard()
+            {
+                $('#change_postcard_overlay').fadeOut(250, 
+                    function()
+                    {
+                        $('#change_postcard_overlay').css('visibility', 'hidden');
+                    }
+                );
+            }
+            
             function sendPostcards()
             {
-                log_message("sendPostcards()");
+                var friendId    = '702152773';
+                var title       = $('#postcard_title').val();
+                var message     = $('#postcard_text').val();
+                
+                $.ajax(
+                    {
+                        url: "index.php/main/sendPostcard",
+                        data: { friendId:friendId, title:title, message:message },
+                        type: 'POST',
+                        error: function(result, error_code, error_thrown)
+                        {
+                            log_message("sendPostcards() ERROR");
+                        },
+                        success: function(result)
+                        {
+                            log_message(result);
+                            showLoading("Enviando Postales...");
+
+                            setTimeout(
+                                function()
+                                {
+                                    completeLoading(function(){log_message("Success !!");}, "¡Terminado!"); 
+                                }, 1000);
+                        }
+                    }
+                );
             }
 
         </script>
@@ -220,7 +262,12 @@
                     <input type="text" class="input_text warning" id="postcard_title" autocomplete="off" value="¡Feliz Navidad!"/>
 
                     <div id="postcard_image_container" class="bg_selector">
-                        <img id="user_image"  src="" />
+                        <img id="user_image"  src="" onmouseover="javascript:displayChangePostcard();" onmouseout="javascript:hideChangePostcard();"/>
+                        <div id="change_postcard_overlay">
+                            
+                            <img src="images/small_camera.png" style="margin-top: 5px;"/> <span>Cambiar foto</span>
+                            &nbsp;
+                        </div>
                     </div>
                     
                     <br/>
@@ -235,8 +282,7 @@
                     </div>
                     
                     <label for="postcard_text">
-                        <textarea class="input_text warning" id="postcard_text" autocomplete="off" rows="5"/>
-                            ¡Felices Fiestas!
+                        <textarea class="input_text warning" id="postcard_text" autocomplete="off" rows="5"/>¡Felices Fiestas!
                         </textarea>
                     </label>
                     
