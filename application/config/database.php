@@ -64,7 +64,7 @@ $db['DEV']['autoinit'] = TRUE;
 $db['DEV']['stricton'] = FALSE;
 
 $db_data;
-if($active_group == "PRODUCTION") $db_data = parse_url(SHARED_DATABASE_URL); 
+if($active_group == "PRODUCTION") $db_data = parse_url(getenv('SHARED_DATABASE_URL')); 
 
 $db['PRODUCTION']['hostname'] = $db_data['host'];
 $db['PRODUCTION']['username'] = $db_data['user'];

@@ -37,8 +37,8 @@ class AlebrijeConfig
         else
         {
             $this->set('IKI_ENVIRONMENT', 'PRODUCTION');
-            $this->set('FB_ID', FACEBOOK_APP_ID);
-            $this->set('FB_SECRET', FACEBOOK_SECRET); 
+            $this->set('FB_ID', getenv('FACEBOOK_APP_ID'));
+            $this->set('FB_SECRET', getenv('FACEBOOK_SECRET')); 
         }
         
      }
