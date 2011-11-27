@@ -63,5 +63,24 @@ $db['DEV']['swap_pre'] = '';
 $db['DEV']['autoinit'] = TRUE;
 $db['DEV']['stricton'] = FALSE;
 
+$db_data;
+if($active_group == "PRODUCTION") $db_data = parse_url(getenv('SHARED_DATABASE_URL')); 
+
+$db['PRODUCTION']['hostname'] = $db_data['host'];
+$db['PRODUCTION']['username'] = $db_data['user'];
+$db['PRODUCTION']['password'] = $db_data['pass'];
+$db['PRODUCTION']['database'] = trim($db_data['path'],'/');
+$db['PRODUCTION']['dbdriver'] = 'postgre';
+$db['PRODUCTION']['dbprefix'] = '';
+$db['PRODUCTION']['pconnect'] = TRUE;
+$db['PRODUCTION']['db_debug'] = TRUE;
+$db['PRODUCTION']['cache_on'] = FALSE;
+$db['PRODUCTION']['cachedir'] = '';
+$db['PRODUCTION']['char_set'] = 'utf8';
+$db['PRODUCTION']['dbcollat'] = 'utf8_general_ci';
+$db['PRODUCTION']['swap_pre'] = '';
+$db['PRODUCTION']['autoinit'] = TRUE;
+$db['PRODUCTION']['stricton'] = FALSE;
+
 /* End of file database.php */
 /* Location: ./application/config/database.php */

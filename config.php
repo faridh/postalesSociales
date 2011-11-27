@@ -15,11 +15,11 @@
             break;
           
             default:
-                define('FACEBOOK_ID', 'UNKNOWN');
-                define('FACEBOOK_APP_SECRET', 'UNKNOWN');
-                define('CANVAS_PAGE', 'UNKNOWN');
-                define('CANVAS_URL', 'UNKNOWN');
-                define('FRONTEND_ENVIRONMENT', 'UNKNOWN');
+                define('FACEBOOK_ID', getenv('FACEBOOK_APP_ID'));
+                define('FACEBOOK_APP_SECRET', getenv('FACEBOOK_SECRET'));
+                define('CANVAS_PAGE','https://apps.facebook.com/tarejtasnavidenas/');
+                define('CANVAS_URL', 'https://freezing-rain-3994.herokuapp.com/');
+                define('FRONTEND_ENVIRONMENT', 'PRODUCTION');
             break;
         }
         

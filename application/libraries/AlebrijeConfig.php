@@ -34,6 +34,12 @@ class AlebrijeConfig
             $this->set('FB_ID', '281719041871297');
             $this->set('FB_SECRET', '165c732aec721e9ea5358c1f8c117e39');
         }
+        else
+        {
+            $this->set('IKI_ENVIRONMENT', 'PRODUCTION');
+            $this->set('FB_ID', getenv('FACEBOOK_APP_ID'));
+            $this->set('FB_SECRET', getenv('FACEBOOK_SECRET')); 
+        }
         
      }
 
