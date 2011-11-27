@@ -224,7 +224,12 @@
                 $('#user_image').attr('height', '260px');
                 $('#user_image').attr('width', '260px');
                 $('#user_image').css('margin-top', '20px');
-                $('#friends_number').html(friendsArray.length);
+                $('#sent_postcards_number').html(sentPostcards);
+                $('#friends_number').html(friendsArray.length - sentPostcards);
+                if ( (friendsArray.length - sentPostcards) == 0 )
+                {
+                    $('#friends_left').html('');
+                }
             }
             
             function changeBackground(imageId)
@@ -253,59 +258,85 @@
 
                 var max = 2000;
                 var friends = [];
-                $.each($('#list').find(".checked"), function(_i, _f){
+                $.each($('#list').find(".checked"), function(_i, _f)
+                {
                     var $f = $(_f).closest(".option");
-                    friends.push($f.attr(FriendList.ATTRIBUTES.fid));
-                    if(friends.length >= max){
+                    if ( friends.length < 20 )
+                    {
+                        friends.push($f.attr(FriendList.ATTRIBUTES.fid));
+                    }
+                    
+                    if ( friends.length >= max )
+                    {
                         return false;
                     }
                 });
                 return friends;
             }
-            s
+            
             function sendPostcards()
             {
-                var friends         = '{"friends":[{"id":"702152773"},{"id":"100001865101410"}]}';
+                
+                showLoading("Enviando Postales...");
+                
                 var title           = $('#postcard_title').val();
                 var message         = $('#postcard_text').val();
                 var list            = getResults();
                 var activeIds       = new Object();
                 activeIds.friends   = new Array();
-                
+                                
                 for ( tempFriendId in list )
                 {
                     var tempFriend  = new Object();
                     tempFriend.id   = list[tempFriendId];
                     activeIds.friends.push(tempFriend);
                 }
-                                
-                showLoading("Enviando Postales...");
-                $.ajax(
+                
+                FB.ui(
                     {
-                        url: "index.php/main/sendPostcard",
-                        data: 
-                            { 
-                                userId:userID, 
-                                friends:activeIds, 
-                                title:title, 
-                                message:message, 
-                                backgroundId:'0', 
-                                songId:'0' 
-                            },
-                        type: 'POST',
-                        error: function(result, error_code, error_thrown)
+                        method: 'apprequests',
+                        message: 'Una tarjeta de Postalitas !!',
+                        to: list.toString()
+                    }, 
+                    function(response)
+                    {
+                        if ( response != null )
                         {
-                            log_message("sendPostcards() ERROR");
-                        },
-                        success: function(result)
-                        {
-                            log_message(result);
-
-                            setTimeout(
-                                function()
+                            log_message("sendPostcards() CALLBACK");
+                            log_message(response);
+                            $.ajax(
                                 {
-                                    completeLoading(function(){}, "¡Terminado!"); 
-                                }, 1000);
+                                    url: "index.php/main/sendPostcard",
+                                    data: 
+                                        { 
+                                            userId:userID, 
+                                            friends:activeIds, 
+                                            title:title, 
+                                            message:message, 
+                                            backgroundId:'0', 
+                                            songId:'0' 
+                                        },
+                                    type: 'POST',
+                                    error: function(result, error_code, error_thrown)
+                                    {
+                                        log_message("sendPostcards() ERROR");
+                                    },
+                                    success: function(result)
+                                    {
+                                        log_message(result);
+
+                                        setTimeout(
+                                            function()
+                                            {
+                                                completeLoading(function(){}, "¡Terminado!"); 
+                                            }, 1000);
+                                    }
+                                }
+                            );
+                        }
+                        else
+                        {
+                            completeLoading(function(){}, "¡ERROR!");
                         }
                     }
                 );
@@ -362,7 +393,9 @@
 
                         <p>
                             Has mandado esta postal a <span id="sent_postcards_number">0</span> amigos tuyos.
-                            ¡Todavía hay <span id="friends_number">0</span> amigos más que amarían recibir esta tarjeta!
+                            <span id="friends_left">
+                                ¡Todavía hay <span id="friends_number">0</span> amigos más que amarían recibir esta tarjeta!
+                            </span>
                         </p>
                     <div id="added_list"></div>
                     
