@@ -283,6 +283,10 @@
                             Has mandado esta postal a <span id="sent_postcards_number">0</span> amigos tuyos.
                             ¡Todavía hay <span id="friends_number">0</span> amigos más que amarían recibir esta tarjeta!
                         </p>
+                    <div id="added_list"></div>
+                   <div id="progress_bar"><div id="progress" style="width: 0px; ">0%</div></div>
+
+<a id="submit_again" class="BigButton Glowing" href="javascript:void(false);">Send to More Friends</a> 
                     </div>
                     
                     <input type="text" class="input_text warning" id="postcard_title" autocomplete="off" value="¡Feliz Navidad!"/>
