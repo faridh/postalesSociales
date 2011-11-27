@@ -131,7 +131,7 @@
                             {
                                 sentPostcardsList.push(tempPostcardList.postcards[postcardId]);
                             }
-                            
+                            sentPostcards = sentPostcardsList.length;
                             fetchFBUser();
                         }
                     }
@@ -176,9 +176,26 @@
                         $("#loading-message").html("¡Buscando fotos del Usuario!");
                         fetchFBUserPhotos();
                         //$("#loading").fadeOut();
+                        filterList();
                         fillList(); 
                     }
                 });
+            }
+            
+            function filterList()
+            {
+                var friendsIndex = 0;
+                for ( friendsIndex = 0; friendsIndex < friendsList.data.length; friendsIndex++ )
+                {
+                    for ( var postcardIndex = 0; postcardIndex < sentPostcardsList.length; postcardIndex++ )
+                    {
+                        if ( friendsList.data[friendsIndex].id == sentPostcardsList[postcardIndex].friend_id  )
+                        {
+                            friendsList.data.splice(friendsIndex, 1);
+                            --friendsIndex;
+                        }
+                    }
+                }                
             }
             
             function fetchFBUserPhotos()
@@ -207,7 +224,12 @@
                 $('#user_image').attr('height', '260px');
                 $('#user_image').attr('width', '260px');
                 $('#user_image').css('margin-top', '20px');
-                $('#friends_number').html(friendsArray.length);
+                $('#sent_postcards_number').html(sentPostcards);
+                $('#friends_number').html(friendsArray.length - sentPostcards);
+                if ( (friendsArray.length - sentPostcards) == 0 )
+                {
+                    $('#friends_left').html('');
+                }
             }
             
             function changeBackground(imageId)
@@ -231,39 +253,97 @@
                 );
             }
             
+            function getResults()
+            {
+
+                var max = 2000;
+                var friends = [];
+                $.each($('#list').find(".checked"), function(_i, _f)
+                {
+                    var $f = $(_f).closest(".option");
+                    if ( friends.length < 20 )
+                    {
+                        friends.push($f.attr(FriendList.ATTRIBUTES.fid));
+                    }
+                    
+                    if ( friends.length >= max )
+                    {
+                        return false;
+                    }
+                });
+                return friends;
+            }
+            
             function sendPostcards()
             {
-                var friends    = '{"friends":[{"id":"702152773"},{"id":"100001865101410"}]}';
-                var title       = $('#postcard_title').val();
-                var message     = $('#postcard_text').val();
                 
                 showLoading("Enviando Postales...");
-                $.ajax(
+                
+                var title           = $('#postcard_title').val();
+                var message         = $('#postcard_text').val();
+                var list            = getResults();
+                var activeIds       = new Object();
+                activeIds.friends   = new Array();
+                                
+                for ( tempFriendId in list )
+                {
+                    var tempFriend  = new Object();
+                    tempFriend.id   = list[tempFriendId];
+                    activeIds.friends.push(tempFriend);
+                }
+                
+                FB.ui(
                     {
-                        url: "index.php/main/sendPostcard",
-                        data: 
-                            { 
-                                userId:userID, 
-                                friends:friends, 
-                                title:title, 
-                                message:message, 
-                                backgroundId:'0', 
-                                songId:'0' 
-                            },
-                        type: 'POST',
-                        error: function(result, error_code, error_thrown)
+                        method: 'apprequests',
+                        message: 'Una tarjeta de Postalitas !!',
+                        to: list.toString()
+                    }, 
+                    function(response)
+                    {
+                        log_message("sendPostcards() CALLBACK");
+                        log_message(response);
+                        if ( response != null )
                         {
-                            log_message("sendPostcards() ERROR");
-                        },
-                        success: function(result)
-                        {
-                            log_message(result);
+                            if ( !response.hasOwnProperty('error_code') )
+                            {
+                                $.ajax(
+                                    {
+                                        url: "index.php/main/sendPostcard",
+                                        data: 
+                                            { 
+                                                userId:userID, 
+                                                friends:activeIds, 
+                                                title:title, 
+                                                message:message, 
+                                                backgroundId:'0', 
+                                                songId:'0' 
+                                            },
+                                        type: 'POST',
+                                        error: function(result, error_code, error_thrown)
+                                        {
+                                            log_message("sendPostcards() ERROR");
+                                        },
+                                        success: function(result)
+                                        {
+                                            log_message(result);
 
-                            setTimeout(
-                                function()
-                                {
-                                    completeLoading(function(){log_message("Success !!");}, "¡Terminado!"); 
-                                }, 1000);
+                                            setTimeout(
+                                                function()
+                                                {
+                                                    completeLoading(function(){}, "¡Terminado!"); 
+                                                }, 1000);
+                                        }
+                                    }
+                                );
+                            }
+                            else
+                            {
+                                completeLoading(function(){}, "¡ERROR!");
+                            }
+                        }
+                        else
+                        {
+                            completeLoading(function(){}, "¡ERROR!");
                         }
                     }
                 );
@@ -293,21 +373,24 @@
                 </div>
                 
                 <div id="selector" class="Design1">
-                       <div class="Prompt" id="instructions">Deselecciona a los amigos a los que no les quieras enviar esta tarjeta</div>     
+                    
+                    <div class="Prompt" id="instructions">Deselecciona a los amigos a los que no les quieras enviar esta tarjeta</div>     
                     <input type="text" id="search">
-                   <div id="list"></div>
-        <div class="Prompt">
-            Send a card to these <span id="friend_count" style="margin:0;padding:0"></span> friends
-            <a href="javascript:void(0);" id="uncheck_all">
-                Uncheck all
-            </a>
-        </div>
+                    <div id="list"></div>
+                    <div class="Prompt">
+                        Send a card to these <span id="friend_count" style="margin:0;padding:0"></span> friends
+                        <a href="javascript:void(0);" id="uncheck_all">
+                            Uncheck all
+                        </a>
+                    </div>
 
-        <div id="choose_more" style="display:none;">
-            Choose up to <span id="remaining"></span> more friends
-        </div>
-        <div id="select_from">
-        </div>
+                    <div id="choose_more" style="display:none;">
+                        Choose up to <span id="remaining"></span> more friends
+                    </div>
+
+                    <div id="select_from">
+                    </div>
+                    
                 </div>
                 
                 <div id="photoSelector">
@@ -317,7 +400,9 @@
 
                         <p>
                             Has mandado esta postal a <span id="sent_postcards_number">0</span> amigos tuyos.
-                            ¡Todavía hay <span id="friends_number">0</span> amigos más que amarían recibir esta tarjeta!
+                            <span id="friends_left">
+                                ¡Todavía hay <span id="friends_number">0</span> amigos más que amarían recibir esta tarjeta!
+                            </span>
                         </p>
                     <div id="added_list"></div>
                     

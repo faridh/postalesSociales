@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.1.59)
 # Database: postalitas
-# Generation Time: 2011-11-27 21:14:04 +0000
+# Generation Time: 2011-11-27 23:14:39 +0000
 # ************************************************************
 
 
@@ -31,9 +31,10 @@ CREATE TABLE `sent_postcards` (
   `title` varchar(50) NOT NULL DEFAULT '',
   `message` varchar(145) NOT NULL DEFAULT '',
   `friend_id` longtext NOT NULL,
+  `request_id` varchar(20) NOT NULL DEFAULT '',
   `created_at` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
 
