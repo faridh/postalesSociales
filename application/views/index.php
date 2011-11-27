@@ -272,6 +272,18 @@
                        <div class="Prompt" id="instructions">Deselecciona a los amigos a los que no les quieras enviar esta tarjeta</div>     
                     <input type="text" id="search">
                    <div id="list"></div>
+        <div class="Prompt">
+            Send a card to these <span id="friend_count" style="margin:0;padding:0"></span> friends
+            <a href="javascript:void(0);" id="uncheck_all">
+                Uncheck all
+            </a>
+        </div>
+
+        <div id="choose_more" style="display:none;">
+            Choose up to <span id="remaining"></span> more friends
+        </div>
+        <div id="select_from">
+        </div>
                 </div>
                 
                 <div id="photoSelector">
