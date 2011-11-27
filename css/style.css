@@ -613,3 +613,25 @@ div .like_container {
 	box-shadow: 0px 0px 10px #000000;
     filter:DropShadow(Color=#000000, OffX=1, OffY=1)
 }
+
+#list {
+border-top: 1px solid #CDCCD4;
+border-bottom: 1px solid #DBDBDB;
+max-height: 500px;
+background-color: white;
+overflow-y: auto;
+overflow-x: hidden;
+text-align: left;
+}
+
+.option {
+    padding: 2px;
+    color: #615E78;
+    font-size: 12px;
+    position: relative;
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
