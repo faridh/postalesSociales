@@ -282,6 +282,7 @@ label span{
 	text-decoration:none;
 	text-transform:none;
 	border-radius:15px;
+    text-align: center;
 }
 
 .selectbox{
@@ -574,8 +575,7 @@ div .like_container {
     vertical-align: middle;
     float: left;
     border: 2px dotted #000;
-    min-height: 500px;
-    max-height: 500px;
+    min-height: 750px;
 }
 
 #photoSelector {
@@ -585,6 +585,31 @@ div .like_container {
     vertical-align: middle;
     float: right;
     border: 2px dotted #000;
-    min-height: 500px;
-    max-height: 500px;
+    min-height: 750px;
+}
+
+#postcard_image_container {
+    width: 300px;
+    max-width: 300px;
+    min-width: 300px;
+    height: 300px;
+    max-height: 300px;
+    min-height: 300px;
+    margin: 40px auto 40px auto;
+    background: url("../images/templates/background01.png");
+    background-repeat: no-repeat;
+}
+
+#postcard_image_background_selector {
+    margin: 10px auto 10px auto;
+    display: inline-block;
+}
+
+.bg_selector {
+    margin: 5px 5px;
+    -moz-box-shadow: 0px 0px 10px #000000;
+	-o-box-shadow:0px 0px 10px #000000;
+	-webkit-box-shadow: 0px 0px 10px #000000;
+	box-shadow: 0px 0px 10px #000000;
+    filter:DropShadow(Color=#000000, OffX=1, OffY=1)
 }

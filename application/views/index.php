@@ -43,6 +43,7 @@
             var userObject      = new Object();
             var friendsList     = new Object();
             var photoList       = new Object();
+            var imageId         = '';
             
             window.fbAsyncInit = function()
             {
@@ -168,7 +169,21 @@
             {
                 $('#main-container').css('visibility', 'visible');
                 $('#main-container').show();
+                $('#user_image').attr('src', 'https://graph.facebook.com/'+ userID +'/picture?type=large');
+                $('#user_image').attr('height', '200px');
+                $('#user_image').attr('width', '200px');
+                $('#user_image').css('margin-top', '50px');
                 log_message("READY TO DISPLAY USER INTERFACE");
+            }
+            
+            function changeBackground(imageId)
+            {
+                $('#postcard_image_container').css('background-image', 'url("images/templates/background'+imageId+'.png")');
+            }
+            
+            function sendPostcards()
+            {
+                log_message("sendPostcards()");
             }
 
         </script>
@@ -204,11 +219,28 @@
 
                     <input type="text" class="input_text warning" id="postcard_title" autocomplete="off" value="¡Feliz Navidad!"/>
 
+                    <div id="postcard_image_container" class="bg_selector">
+                        <img id="user_image"  src="" />
+                    </div>
+                    
+                    <br/>
+                    
+                    <div id="postcard_image_background_selector">
+                        
+                        <img class="bg_selector" id="icon01" src="images/templates/icons/background_icon01.png" onclick="javascript:changeBackground('01');" />
+                        <img class="bg_selector" id="icon02" src="images/templates/icons/background_icon02.png" onclick="javascript:changeBackground('02');" />
+                        <img class="bg_selector" id="icon03" src="images/templates/icons/background_icon03.png" onclick="javascript:changeBackground('03');" />
+                        <img class="bg_selector" id="icon04" src="images/templates/icons/background_icon04.png" onclick="javascript:changeBackground('04');" />
+                        
+                    </div>
+                    
                     <label for="postcard_text">
                         <textarea class="input_text warning" id="postcard_text" autocomplete="off" rows="5"/>
                             ¡Felices Fiestas!
                         </textarea>
                     </label>
+                    
+                    <input type="submit" class="button" value="¡Enviar!" onclick="javascript:sendPostcards();" />
                     
                 </div>
                 
