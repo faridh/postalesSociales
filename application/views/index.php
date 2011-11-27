@@ -345,7 +345,7 @@
                     <div id="added_list"></div>
                     
                     <div id="progress_bar"><div id="progress" style="width: 0px; ">0%</div></div>
-                        <a id="submit_again" class="BigButton Glowing" href="javascript:void(false);">Send to More Friends</a> 
+                        <a id="submit_again" class="BigButton Glowing" style='color:#fff;'  href="javascript:void(false);">Send to More Friends</a> 
                     </div>
                     
                     <input type="text" class="input_text warning" id="postcard_title" autocomplete="off" value="¡Feliz Navidad!"/>
