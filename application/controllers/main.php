@@ -47,13 +47,15 @@ class Main extends CI_Controller
         $this->load->database();
         
         $userId         = $_POST['userId'];
-        $friends        = json_decode($_POST['friends']);
+        $friends        = $_POST['friends'];
         $title          = $_POST['title'];
         $message        = $_POST['message'];
         $backgroundId   = $_POST['backgroundId'];
         $songId         = $_POST['songId'];
-                
-        foreach ( $friends->friends as $friend )
+        
+        log_message("error", "POST: ".print_r($_POST, true));
+        
+        foreach ( $friends['friends'] as $friend )
         {
             $newPostcard    = array(
                 'user_id'       => $userId,
@@ -61,7 +63,7 @@ class Main extends CI_Controller
                 'title'         => $title,
                 'message'       => $message,
                 'song_id'       => $songId,
-                'friend_id'     => $friend->id,
+                'friend_id'     => $friend['id'],
                 'created_at'    => time()
             );
 

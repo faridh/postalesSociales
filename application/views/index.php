@@ -184,10 +184,6 @@
             
             function filterList()
             {
-                log_message("filterList()");
-                
-                log_message("Size before: " + friendsList.data.length);
-                
                 var friendsIndex = 0;
                 for ( friendsIndex = 0; friendsIndex < friendsList.data.length; friendsIndex++ )
                 {
@@ -199,9 +195,7 @@
                             --friendsIndex;
                         }
                     }
-                }
-                
-                log_message("Size after: " + friendsList.data.length + ", " + friendsIndex);
+                }                
             }
             
             function fetchFBUserPhotos()
@@ -254,12 +248,37 @@
                 );
             }
             
+            function getResults()
+            {
+
+                var max = 2000;
+                var friends = [];
+                $.each($('#list').find(".checked"), function(_i, _f){
+                    var $f = $(_f).closest(".option");
+                    friends.push($f.attr(FriendList.ATTRIBUTES.fid));
+                    if(friends.length >= max){
+                        return false;
+                    }
+                });
+                return friends;
+            }
+            s
             function sendPostcards()
             {
-                var friends    = '{"friends":[{"id":"702152773"},{"id":"100001865101410"}]}';
-                var title       = $('#postcard_title').val();
-                var message     = $('#postcard_text').val();
+                var friends         = '{"friends":[{"id":"702152773"},{"id":"100001865101410"}]}';
+                var title           = $('#postcard_title').val();
+                var message         = $('#postcard_text').val();
+                var list            = getResults();
+                var activeIds       = new Object();
+                activeIds.friends   = new Array();
                 
+                for ( tempFriendId in list )
+                {
+                    var tempFriend  = new Object();
+                    tempFriend.id   = list[tempFriendId];
+                    activeIds.friends.push(tempFriend);
+                }
+                                
                 showLoading("Enviando Postales...");
                 $.ajax(
                     {
@@ -267,7 +286,7 @@
                         data: 
                             { 
                                 userId:userID, 
-                                friends:friends, 
+                                friends:activeIds, 
                                 title:title, 
                                 message:message, 
                                 backgroundId:'0', 
@@ -285,7 +304,7 @@
                             setTimeout(
                                 function()
                                 {
-                                    completeLoading(function(){log_message("Success !!");}, "¡Terminado!"); 
+                                    completeLoading(function(){}, "¡Terminado!"); 
                                 }, 1000);
                         }
                     }
@@ -316,21 +335,24 @@
                 </div>
                 
                 <div id="selector" class="Design1">
-                       <div class="Prompt" id="instructions">Deselecciona a los amigos a los que no les quieras enviar esta tarjeta</div>     
+                    
+                    <div class="Prompt" id="instructions">Deselecciona a los amigos a los que no les quieras enviar esta tarjeta</div>     
                     <input type="text" id="search">
-                   <div id="list"></div>
-        <div class="Prompt">
-            Send a card to these <span id="friend_count" style="margin:0;padding:0"></span> friends
-            <a href="javascript:void(0);" id="uncheck_all">
-                Uncheck all
-            </a>
-        </div>
+                    <div id="list"></div>
+                    <div class="Prompt">
+                        Send a card to these <span id="friend_count" style="margin:0;padding:0"></span> friends
+                        <a href="javascript:void(0);" id="uncheck_all">
+                            Uncheck all
+                        </a>
+                    </div>
 
-        <div id="choose_more" style="display:none;">
-            Choose up to <span id="remaining"></span> more friends
-        </div>
-        <div id="select_from">
-        </div>
+                    <div id="choose_more" style="display:none;">
+                        Choose up to <span id="remaining"></span> more friends
+                    </div>
+
+                    <div id="select_from">
+                    </div>
+                    
                 </div>
                 
                 <div id="photoSelector">
