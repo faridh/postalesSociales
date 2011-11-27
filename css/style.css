@@ -575,7 +575,7 @@ div .like_container {
     vertical-align: middle;
     float: left;
     border: 2px dotted #000;
-    min-height: 750px;
+    min-height: 900px;
 }
 
 #photoSelector {
@@ -585,7 +585,7 @@ div .like_container {
     vertical-align: middle;
     float: right;
     border: 2px dotted #000;
-    min-height: 750px;
+    min-height: 900px;
 }
 
 #postcard_image_container {
@@ -612,6 +612,9 @@ div .like_container {
 	-webkit-box-shadow: 0px 0px 10px #000000;
 	box-shadow: 0px 0px 10px #000000;
     filter:DropShadow(Color=#000000, OffX=1, OffY=1)
+}
+
+#success_message {
 }
 
 #change_postcard_overlay {

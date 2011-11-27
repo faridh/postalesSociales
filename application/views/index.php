@@ -44,6 +44,7 @@
             var environment     = '<?php echo FRONTEND_ENVIRONMENT; ?>';
             var userObject      = new Object();
             var friendsList     = new Object();
+            var friendsArray    = new Array();
             var photoList       = new Object();
             var imageId         = '';
             
@@ -139,6 +140,11 @@
                     else
                     {
                         friendsList = response;
+                        for ( friend in friendsList.data )
+                        {
+                            friendsArray.push(friendsList.data[friend]);
+                        }
+                        
                         $("#loading-message").html("¡Buscando fotos del Usuario!");
                         log_message("FRIENDS: ");
                         log_message(response);
@@ -177,6 +183,7 @@
                 $('#user_image').attr('height', '260px');
                 $('#user_image').attr('width', '260px');
                 $('#user_image').css('margin-top', '20px');
+                $('#friends_number').html(friendsArray.length);
             }
             
             function changeBackground(imageId)
@@ -209,7 +216,15 @@
                 $.ajax(
                     {
                         url: "index.php/main/sendPostcard",
-                        data: { friendId:friendId, title:title, message:message },
+                        data: 
+                            { 
+                                userId:userID, 
+                                friendId:friendId, 
+                                title:title, 
+                                message:message, 
+                                backgroundId:'0', 
+                                songId:'0' 
+                            },
                         type: 'POST',
                         error: function(result, error_code, error_thrown)
                         {
@@ -262,6 +277,15 @@
                 
                 <div id="photoSelector">
 
+                    <div id="success_message">
+                        <h3>¡Excelente!</h3>
+
+                        <p>
+                            Has mandado esta postal a <span id="sent_postcards_number">0</span> amigos tuyos.
+                            ¡Todavía hay <span id="friends_number">0</span> amigos más que amarían recibir esta tarjeta!
+                        </p>
+                    </div>
+                    
                     <input type="text" class="input_text warning" id="postcard_title" autocomplete="off" value="¡Feliz Navidad!"/>
 
                     <div id="postcard_image_container" class="bg_selector">

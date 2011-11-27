@@ -23,7 +23,31 @@ class Main extends CI_Controller
 
     public function sendPostcard()
     {
-        log_message("error", "POST: ".print_r($_POST, true));
+        
+        $this->load->database();
+        
+        $userId         = $_POST['userId'];
+        $friendId       = $_POST['friendId'];
+        $title          = $_POST['title'];
+        $message        = $_POST['message'];
+        $backgroundId   = $_POST['backgroundId'];
+        $songId         = $_POST['songId'];
+        
+        $friends        = $friendId;
+        
+        $newPostcard    = array(
+            'user_id'       => $userId,
+            'background_id' => $backgroundId,
+            'title'         => $title,
+            'message'       => $message,
+            'song_id'       => $songId,
+            'friends'       => $friends,
+            'created_at'    => time()
+            
+        );
+        
+        $this->db->insert('sent_postcards', $newPostcard);
+        
         die("{success:true}");
     }
     
