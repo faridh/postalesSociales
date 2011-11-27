@@ -300,39 +300,46 @@
                     }, 
                     function(response)
                     {
+                        log_message("sendPostcards() CALLBACK");
+                        log_message(response);
                         if ( response != null )
                         {
-                            log_message("sendPostcards() CALLBACK");
-                            log_message(response);
-                            $.ajax(
-                                {
-                                    url: "index.php/main/sendPostcard",
-                                    data: 
-                                        { 
-                                            userId:userID, 
-                                            friends:activeIds, 
-                                            title:title, 
-                                            message:message, 
-                                            backgroundId:'0', 
-                                            songId:'0' 
+                            if ( !response.hasOwnProperty('error_code') )
+                            {
+                                $.ajax(
+                                    {
+                                        url: "index.php/main/sendPostcard",
+                                        data: 
+                                            { 
+                                                userId:userID, 
+                                                friends:activeIds, 
+                                                title:title, 
+                                                message:message, 
+                                                backgroundId:'0', 
+                                                songId:'0' 
+                                            },
+                                        type: 'POST',
+                                        error: function(result, error_code, error_thrown)
+                                        {
+                                            log_message("sendPostcards() ERROR");
                                         },
-                                    type: 'POST',
-                                    error: function(result, error_code, error_thrown)
-                                    {
-                                        log_message("sendPostcards() ERROR");
-                                    },
-                                    success: function(result)
-                                    {
-                                        log_message(result);
+                                        success: function(result)
+                                        {
+                                            log_message(result);
 
-                                        setTimeout(
-                                            function()
-                                            {
-                                                completeLoading(function(){}, "¡Terminado!"); 
-                                            }, 1000);
+                                            setTimeout(
+                                                function()
+                                                {
+                                                    completeLoading(function(){}, "¡Terminado!"); 
+                                                }, 1000);
+                                        }
                                     }
-                                }
-                            );
+                                );
+                            }
+                            else
+                            {
+                                completeLoading(function(){}, "¡ERROR!");
+                            }
                         }
                         else
                         {
