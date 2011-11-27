@@ -28,6 +28,7 @@
         <script src="lib/js/jquery-1.7.min.js" type="text/javascript"></script>
         <script src="lib/js/animations.js" type="text/javascript"></script>
         <script src="lib/js/logging.js" type="text/javascript"></script>
+        <script src="lib/js/lists.js" type="text/javascript"></script>
         
         <!--[if lt IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -143,6 +144,7 @@
                         log_message(response);
                         fetchFBUserPhotos();
                         //$("#loading").fadeOut();
+                        fillList(); 
                     }
                 });
             }
@@ -254,7 +256,8 @@
                 </div>
                 
                 <div id="selector">
-                    &nbsp;
+                       <div id="instructions">Deselecciona a los amigos a los que no les quieras enviar esta tarjeta</div>     
+                   <div id="list"></div>
                 </div>
                 
                 <div id="photoSelector">
