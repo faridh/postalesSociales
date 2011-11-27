@@ -131,7 +131,7 @@
                             {
                                 sentPostcardsList.push(tempPostcardList.postcards[postcardId]);
                             }
-                            
+                            sentPostcards = sentPostcardsList.length;
                             fetchFBUser();
                         }
                     }
@@ -176,9 +176,32 @@
                         $("#loading-message").html("¡Buscando fotos del Usuario!");
                         fetchFBUserPhotos();
                         //$("#loading").fadeOut();
+                        filterList();
                         fillList(); 
                     }
                 });
+            }
+            
+            function filterList()
+            {
+                log_message("filterList()");
+                
+                log_message("Size before: " + friendsList.data.length);
+                
+                var friendsIndex = 0;
+                for ( friendsIndex = 0; friendsIndex < friendsList.data.length; friendsIndex++ )
+                {
+                    for ( var postcardIndex = 0; postcardIndex < sentPostcardsList.length; postcardIndex++ )
+                    {
+                        if ( friendsList.data[friendsIndex].id == sentPostcardsList[postcardIndex].friend_id  )
+                        {
+                            friendsList.data.splice(friendsIndex, 1);
+                            --friendsIndex;
+                        }
+                    }
+                }
+                
+                log_message("Size after: " + friendsList.data.length + ", " + friendsIndex);
             }
             
             function fetchFBUserPhotos()
