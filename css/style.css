@@ -614,6 +614,32 @@ div .like_container {
     filter:DropShadow(Color=#000000, OffX=1, OffY=1)
 }
 
+#change_postcard_overlay {
+    background-color: #000;
+    width: 260px;
+    height: 30px;
+    opacity: 0.7;
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+    filter: alpha(opacity=70);
+    position: relative;
+    bottom: 32px;
+    left: 20px;
+    visibility: hidden;
+}
+
+#friend_list_container
+{
+position: absolute;
+left: 0;
+top: 0;
+width: 202px;
+color: #615E78;
+font-size: 12px;
+-moz-box-shadow: 1px 0 2px #cdccd4;
+-webkit-box-shadow: 1px 0 2px #cdccd4;
+box-shadow: 1px 0 2px #cdccd4;
+}
+
 #list {
     border-top: 1px solid #CDCCD4;
     border-bottom: 1px solid #DBDBDB;
@@ -649,7 +675,6 @@ div .like_container {
     margin: 0 3px;
 }
 
-
 .option {
     padding: 2px;
     color: #615E78;
@@ -662,4 +687,5 @@ div .like_container {
     cursor: pointer;
 }
 
+.checked {background-position:0px -50px}
 
