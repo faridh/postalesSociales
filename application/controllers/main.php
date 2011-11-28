@@ -76,7 +76,7 @@ class Main extends CI_Controller
     public function createDB()
     {
         $this->load->database();
-        $this->db->query('CREATE TABLE `sent_postcards` (
+        $this->db->query("CREATE TABLE `sent_postcards` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` varchar(20) NOT NULL DEFAULT '',
   `background_id` varchar(10) NOT NULL DEFAULT '',
@@ -87,7 +87,7 @@ class Main extends CI_Controller
   `request_id` varchar(20) NOT NULL DEFAULT '',
   `created_at` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-            );');
+            );");
 
 
     }
